@@ -11,11 +11,12 @@ var specialChar =
 ["!", "#", "$", "%", "&", "(","*", "+", "-", "/", "<", ">", "?", "@", "[", "]", "^", "_"]
 
 
-var numbers = [1,2,3,4,5,6,7,8,9,0];
+var numbers = ["1","2","3","4","5","6","7","8","9","0"];
 
 function generatePassword() {
   console.log("Hey! You clicked the button!");
   var selectedConditions = []
+  var password = "";
   // WHEN prompted for the length of the password
   // THEN I choose a length of at least 8 characters and no more than 128 characters
   var lengthPassword = parseInt(prompt ("How long would you like your password to be, it must be at least 8 characters no more than 128."))
@@ -44,8 +45,21 @@ function generatePassword() {
   if(isSpecial){
     selectedConditions = selectedConditions.concat(specialChar)
   }
-  // WHEN all prompts are answered
+  if(isNumeric){
+    selectedConditions = selectedConditions.concat(numbers)
+  }
+  
+  var randomArr = []
+  for(var index = 0; index < selectedConditions.length; index++){
+    var randomIndex = Math.floor(Math.random() * selectedConditions.length);
+    randomArr.push(selectedConditions[randomIndex])
+  }
+  for (var index = 0; index < lengthPassword; index++){
+    var randomIndex = Math.floor(Math.random() * randomArr.length);
+    password = password + randomArr[randomIndex]
+  }
   // THEN a password is generated that matches the selected criteria
+  return password 
   // WHEN the password is generated
   // THEN the password is either displayed in an alert or written to the page 
 
