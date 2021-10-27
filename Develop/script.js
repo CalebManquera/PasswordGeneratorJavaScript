@@ -15,7 +15,7 @@ var numbers = [1,2,3,4,5,6,7,8,9,0];
 
 function generatePassword() {
   console.log("Hey! You clicked the button!");
-
+  var selectedConditions = []
   // WHEN prompted for the length of the password
   // THEN I choose a length of at least 8 characters and no more than 128 characters
   var lengthPassword = parseInt(prompt ("How long would you like your password to be, it must be at least 8 characters no more than 128."))
@@ -25,8 +25,25 @@ function generatePassword() {
   }
   // WHEN asked for character types to include in the password
   // THEN I confirm whether or not to include lowercase, uppercase, numeric, and/or special characters
+  var isUppercase = confirm("would you like uppercase letters?");
+  var isLowercase = confirm("would you like lowercase letters?");
+  var isNumeric = confirm("would you like numbers?");
+  var isSpecial = confirm("would you like special characters?");
   // WHEN I answer each prompt
   // THEN my input should be validated and at least one character type should be selected
+  if(!isUppercase && !isLowercase && !isNumeric && !isSpecial){
+    alert("At least one type character type should be selected")
+    return('try again')
+  }
+  if(isUppercase){
+    selectedConditions = selectedConditions.concat(uppercaseChar)
+  }
+  if(isLowercase){
+    selectedConditions = selectedConditions.concat(lowercaseChar)
+  }
+  if(isSpecial){
+    selectedConditions = selectedConditions.concat(specialChar)
+  }
   // WHEN all prompts are answered
   // THEN a password is generated that matches the selected criteria
   // WHEN the password is generated
